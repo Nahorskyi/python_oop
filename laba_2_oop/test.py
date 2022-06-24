@@ -5,27 +5,16 @@ from math import pi
 
 
 class TriangleSquareTest(unittest.TestCase): 
-    def test_triangle_square(self):
+    def test1_triangle_square(self):
         expected = 6.0
         s = main.Triangle(3,4,5).square()
         self.assertEqual(expected, s)
+   
 
     def test_triangle_perimeter(self):
         expected = 12
         p = main.Triangle(3,4,5).perimeter()
         self.assertEqual(expected, p) 
-
-
-class ParallelogramTest(unittest.TestCase): 
-    def test_parallelogram_square(self):
-        expected = 3.9999999999999996
-        s = main.Parallelogram(4,2,30).square()
-        self.assertEqual(expected, s)
-
-    def test_parallelogram_perimeter(self):
-        expected = 18
-        p = main.Parallelogram(4,5,60).perimeter()
-        self.assertEqual(expected, p)   
 
 
 class SquareTest(unittest.TestCase): 
@@ -64,13 +53,43 @@ class CircleTest(unittest.TestCase):
         self.assertEqual(expected, p)  
 
 
-class EllipseTest(unittest.TestCase): 
-    def test_ellipse_square(self):
-        expected = 5*2*pi
-        s = main.Ellipse(5,2).square()
-        self.assertEqual(expected, s)
+class ValidationTest(unittest.TestCase):
+    def test1_circle_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Circle(-5)
+        self.assertTrue("Менше або дорівнює 0", actual)
 
-    def test_ellipse_perimeter(self):
-        expected = 14.279644737231006
-        p = main.Ellipse(2,3).perimeter()
-        self.assertEqual(expected, p)
+    def test2_circle_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Circle(0)
+        self.assertTrue("Менше або дорівнює 0", actual)   
+
+    def test1_square_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Square(-100)
+        self.assertTrue("Менше або дорівнює 0", actual)
+
+    def test2_square_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Square(0)
+        self.assertTrue("Менше або дорівнює 0", actual)
+
+    def test1_rectangle_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Rectangle(-5, 7)
+        self.assertTrue("Менше або дорівнює 0", actual)
+
+    def test2_rectangle_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Rectangle(0, 7)
+        self.assertTrue("Менше або дорівнює 0", actual)
+
+    def test1_triangle_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Triangle(0, 7, 3)
+        self.assertTrue("Менше або дорівнює 0", actual)
+
+    def test2_triangle_validation(self):
+        with self.assertRaises(ValueError) as actual:
+            main.Triangle(-10, 7, 3)
+        self.assertTrue("Менше або дорівнює 0", actual)        

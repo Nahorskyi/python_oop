@@ -5,6 +5,7 @@ from math import pi
 from math import sqrt
 from math import radians
 
+
 class Figure(ABC):
     abstractclassmethod
     def __init__(self):
@@ -18,11 +19,20 @@ class Figure(ABC):
     def perimeter(self, *args):
         pass
 
+def Validation(value):
+    if value <= 0:
+        raise ValueError("Не підходить значення")
+    return value
+
+
 class Triangle (Figure):
-    def __init__(self, a, b ,ń):
+    def __init__(self, a, b ,с):
         self.a = a
+        self.a = Validation(a)
         self.b = b
-        self.c = ń 
+        self.b = Validation(b)
+        self.c = с
+        self.с = Validation(с)
 
     def square(self):
         if (self.a + self.b > self.c and self.a + self.c > self.b and self.c + self.b > self.a ):
@@ -37,29 +47,14 @@ class Triangle (Figure):
         else:
             return 0
 
-class Parallelogram(Figure):
-    def __init__(self, a , b , c):
-        self.a = a
-        self.b = b
-        self.c = c
+     
 
-    def perimeter(self):
-        if (self.c<360):
-          return 2*self.a + 2*self.b 
-        else:
-            return 0  
-
-    def square(self):
-        if (self.c < 360):
-          return sin(radians(self.c))*self.a*self.b   
-        else:
-            return 0          
-
-
-class Rectangle(Parallelogram):
+class Rectangle(Figure):
     def __init__(self, a, b):
         self.a = a
+        self.a = Validation(a)
         self.b = b
+        self.b = Validation(b)
 
     def square(self):
         return self.a * self.b  
@@ -71,6 +66,7 @@ class Rectangle(Parallelogram):
 class Square(Rectangle):
     def __init__(self, a):
         self.a = a
+        self.a = Validation(a)
 
     def square(self):
         return self.a **2 
@@ -82,21 +78,10 @@ class Square(Rectangle):
 class Circle(Figure):
     def __init__(self, r):
         self.r = r
+        self.r = Validation(r)
 
     def square(self):
         return (self.r **2) * pi
 
     def perimeter(self):     
         return self.r*pi*2
-
-
-class Ellipse(Circle):
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b 
-   
-    def square(self):
-        return self.a*self.b*pi
-
-    def perimeter(self):     
-        return 4*(self.a*self.b*pi +(self.a-self.b))/(self.a+self.b)
